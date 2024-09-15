@@ -1,0 +1,16 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "rf-mongo-allow-ingress-from-mgmt"  
+  namespace: production
+spec:
+  endpointSelector:
+    matchLabels:
+      role: database
+      app: mock-mongo
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        role: backend
+        app: mgmt
+        
