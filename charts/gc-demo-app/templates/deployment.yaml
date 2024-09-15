@@ -1,0 +1,36 @@
+{{- range .Values.apps }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .name }}
+  namespace: {{ $.Values.namespace }}
+  labels:
+    app: {{ .name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .name }}
+      role: {{ .role }}
+  template:
+    metadata:
+      labels:
+        app: {{ .name }}
+        role: {{ .role }}
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: "arikab64/cilium-demo-app:latest"
+          command: ["python", "./app.py"]
+          env:
+            - name: APP_ID
+              value: "{{ $.Values.namespace }}_{{ .name }}"
+            - name: TARGETS
+              value: "{{ .targets }}"
+            - name: PORT
+              value: "{{ .port }}"
+          ports:
+            - containerPort: {{ .port }}
+---
+{{- end }}
+

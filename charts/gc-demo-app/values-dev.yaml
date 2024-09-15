@@ -1,0 +1,23 @@
+namespace: dev
+
+apps:
+  - name: ui
+    port: 8080
+    targets: "mgmt-service.dev:8080#5"
+    role: frontend
+
+  - name: mgmt
+    port: 8080
+    targets: "ui-service.dev:8080#5,mock-mongo-service.dev:8080#2"
+    role: backend
+    
+  - name: mock-mongo
+    port: 8080
+    targets: ""
+    role: database
+
+  # - name: collector
+  #   port: 8080
+  #   targets: "mgmt-service.dev:8080#1"
+  #   role: data-path
+

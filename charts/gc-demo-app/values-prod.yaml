@@ -1,0 +1,22 @@
+namespace: production
+
+apps:
+  - name: ui
+    port: 8080
+    targets: "mgmt-service.production:8080#10"
+    role: frontend
+  
+  - name: mgmt
+    port: 8080
+    targets: "mock-mongo-service.production:8080#1,ui-service.production:8080#5"
+    role: backend
+    
+  - name: mock-mongo
+    port: 8080
+    targets: ""
+    role: database
+
+  - name: collector
+    port: 8080
+    targets: "mgmt-service.production:8080#1"
+    role: data-path
