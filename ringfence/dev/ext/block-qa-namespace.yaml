@@ -1,0 +1,18 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "isolate-from-qa"
+  namespace: dev
+spec:
+  endpointSelector: {}  # Applies to all endpoints
+  # egress:
+  #   - toEntities: 
+  #     - cluster 
+  ingressDeny:
+    - fromEndpoints:
+        - matchLabels:
+            "k8s:io.kubernetes.pod.namespace": qa
+  # egressDeny:
+  #   - toEndpoints:
+  #       - matchLabels:
+  #           "k8s:io.kubernetes.pod.namespace": qa

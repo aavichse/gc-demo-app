@@ -1,0 +1,15 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "rf-ui-allow-ingress-from-mgmt"  
+  namespace: qa
+spec:
+  endpointSelector:
+    matchLabels:
+      role: frontend
+      app: ui
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        role: backend
+        app: mgmt

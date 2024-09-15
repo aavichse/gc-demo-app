@@ -1,0 +1,16 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-data-path-from-qa
+  namespace: dev
+spec:
+  endpointSelector:
+    matchLabels:
+      app: mgmt
+      role: backend
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app: collector
+            role: data-path
+            io.kubernetes.pod.namespace: qa

@@ -1,0 +1,23 @@
+namespace: qa
+
+apps:
+  - name: ui
+    port: 8080
+    targets: "mgmt-service.qa:8080#5"
+    role: frontend
+
+  - name: mgmt
+    port: 8080
+    targets: "ui-service.qa:8080#2,mock-mongo-service.qa:8080#3,ui-service.production:8080#2"
+    role: backend
+    
+  - name: mock-mongo
+    port: 8080
+    targets: ""
+    role: database
+
+  - name: collector
+    port: 8080
+    targets: "mgmt-service.qa:8080#1,mgmt-service.dev:8080#5,mgmt-service.production:8080#5"
+    role: data-path
+

@@ -1,0 +1,29 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: rf-mgmt-allow-ingress-from-collector-and-ui
+  namespace: qa
+spec:
+  endpointSelector:
+    matchLabels:
+      app: mgmt
+      role: backend
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app: collector
+            role: data-path
+        - matchLabels:
+            app: ui
+            role: frontend
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            app: ui
+            role: frontend
+        - matchLabels:
+            app: mock-mongo
+            role: database
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns

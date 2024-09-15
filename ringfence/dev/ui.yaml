@@ -1,0 +1,23 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "rf-ui-allow-ingress-from-mgmt"  
+  namespace: dev
+spec:
+  endpointSelector:
+    matchLabels:
+      role: frontend
+      app: ui
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        role: backend
+        app: mgmt
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            app: mgmt
+            role: backend
+        - matchLabels:
+            io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns        

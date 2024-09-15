@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-canary-data-path
+  namespace: production
+spec:
+  endpointSelector:
+    matchLabels:
+      app: mgmt
+      role: backend
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app: collector
+            role: data-path
+            "k8s:io.kubernetes.pod.namespace": canary
+  
