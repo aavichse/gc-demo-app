@@ -10,13 +10,4 @@ entries:
     urls:
     - https://aavichse.github.io/gc-demo-app/gc-demo-app/demo-1.1.0.tgz
     version: 1.1.0
-  - apiVersion: v2
-    appVersion: "1.0"
-    created: "2024-12-29T17:09:53.640361978+02:00"
-    description: A Helm chart for deploying centra demo
-    digest: c89522274565665063849f34bff1236c7767badc2a843d1aa9bc7b2335950f17
-    name: demo
-    urls:
-    - https://aavichse.github.io/gc-demo-app/gc-demo-app/demo-1.0.0.tgz
-    version: 1.0.0
 generated: "2024-12-29T17:09:53.632548729+02:00"
